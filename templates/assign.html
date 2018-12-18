@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <form method=POST action="{{ url_for('login') }}">
+                <div class="form-group">
+                    <label for="exampleAssign">Assign to whom: </label>
+                    <input type="text" class="form-control" name="assign" placeholder="@JohnDoe">
+                </div>
+                <div class="form-group">
+                    <label for="exampleTicket">Ticket: </label>
+                    <input type="text" class="form-control" name="ticketIssue" placeholder="Issue Is something">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Log In</button>
+            </form>
+            <br>
+            <div>
+                Don't have an account? <a href="{{ url_for('register') }}">Sign up here</a>.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

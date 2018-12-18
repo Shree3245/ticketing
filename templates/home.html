@@ -3,13 +3,17 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <form method=POST action="{{ url_for('secondAuth') }}">
+            <form method=POST action="{{ url_for('assign') }}">
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Assign a Ticket</button>
                 </div>
+                
+            </form>
+            <form method=POST action="{{ url_for('viewTicket') }}">
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">View Tickets</button>
+                    <button type="ViewAllAdmin" class="btn btn-primary btn-block">View Tickets</button>
                 </div>
+                    
             </form>
             <br>
         </div>

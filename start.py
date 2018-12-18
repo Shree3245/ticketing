@@ -2,18 +2,18 @@ from flask import Flask, render_template, url_for, request, session, redirect
 from flask_pymongo import PyMongo
 import bcrypt
 from auth import authenticate
-
+# to run mongodb from cmd type in "C:\Program Files\MongoDB\Server\4.04\bin\mongod.exe" 
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'mongologinexample1'
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/myDatabase1'
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/myDatabase'
 
 mongo = PyMongo(app)
 
 @app.route('/')
 def index():
     if 'username' in session:
-        return 'You are logged in as ' + session['username']
+        return redirect(url_for('home'))
 
     return render_template('index.html')
 
@@ -27,8 +27,29 @@ def login():
             session['username'] = request.form['username']
             return redirect(url_for('index'))
 
-    return redirect(url_for('index'))
+    return 'Invalid username/password combination'
 
+@app.route('/home')
+def home():
+    if 'username' in session:
+        return render_template('home.html')
+
+    else:
+        return redirect(url_for('index'))
+
+@app.route('/assign', methods=['POST'])
+def assign():
+    if request.method == 'POST':  
+        #user=request.form['assign']
+        password = request.form['ticketIssue']
+        #print(user,password)
+        pass
+
+    return render_template('assign.html')
+
+@app.route('/viewTicket', methods=['GET'])
+def viewTicket():
+    return "View"
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -36,7 +57,8 @@ def register():
         
         user=request.form['username']
         password = request.form['pass']
-        auth = authenticate(user,password)
+        global uID
+        auth,uID = authenticate(user,password)
         if auth == 'success':
             return redirect(url_for('secondAuth'))
         else:
