@@ -9,6 +9,7 @@ def authenticate(username,password):
     output =  json_data['status'].lower()
 
     global uID
+    uID = '0'
     try:
         uID=str(json_data['data']['userId'])
     except KeyError:

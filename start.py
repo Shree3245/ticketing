@@ -37,17 +37,18 @@ def home():
     else:
         return redirect(url_for('index'))
 
-@app.route('/assign', methods=['POST'])
+@app.route('/assign', methods=['POST', 'GET'])
 def assign():
-    if request.method == 'POST':  
-        #user=request.form['assign']
-        password = request.form['ticketIssue']
-        #print(user,password)
-        pass
-
+    if 'username' in session:
+        
+        ticket = request.form['ticket']
+        return ticket
     return render_template('assign.html')
 
-@app.route('/viewTicket', methods=['GET'])
+@app.route("/ticketConfirm")
+def ticketConfirm():
+    return 'x'
+@app.route('/viewTicket')
 def viewTicket():
     return "View"
 
